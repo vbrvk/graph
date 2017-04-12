@@ -1,0 +1,29 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "quotes": [
+      2,
+      "single"
+    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "linebreak-style": [
+      2,
+      "unix"
+    ],
+    "semi": [
+      2,
+      "always"
+    ],
+    "no-console": "off"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "parser": "babel-eslint"
+}
