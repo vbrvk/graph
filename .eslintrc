@@ -6,6 +6,7 @@
       2,
       "single"
     ],
+    "func-names": ["error", "never"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "linebreak-style": [
       2,

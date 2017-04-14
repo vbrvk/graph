@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import parse from './parse';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const KEY_CODES = {
   TAB: 9,
@@ -7,8 +7,7 @@ const KEY_CODES = {
 
 export default class Text extends Component {
   static propTypes = {
-    setTree: PropTypes.func.isRequired,
-    setError: PropTypes.func.isRequired,
+    setText: PropTypes.func.isRequired,
     className: PropTypes.string.isRequired,
   }
 
@@ -20,23 +19,27 @@ export default class Text extends Component {
 
 
   onChange() {
-    const text = this.area.value;
-    try {
-      const tree = parse(text, ' ');
-      this.props.setTree(tree);
-    } catch (err) {
-      this.props.setError(err);
-    }
+    this.props.setText(this.area.value);
   }
 
   onKeyDown(e) {
     if (e.keyCode === KEY_CODES.TAB) {
-      e.preventDefault();
       let text = this.area.value;
       const cursorPos = this.area.selectionStart;
-      text = `${text.slice(0, cursorPos)}\t${text.slice(cursorPos + 1)}`;
+      let nextCursorPos;
+      if (e.shiftKey && text[cursorPos - 1] === '\t') {
+        text = `${text.slice(0, cursorPos - 1)}${text.slice(cursorPos)}`;
+        nextCursorPos = cursorPos - 1;
+      } else {
+        text = `${text.slice(0, cursorPos)}\t${text.slice(cursorPos)}`;
+        nextCursorPos = cursorPos + 1;
+      }
+
       this.area.value = text;
+      this.area.selectionStart = nextCursorPos;
+      this.area.selectionEnd = nextCursorPos;
       this.onChange();
+      e.preventDefault();
     }
   }
 

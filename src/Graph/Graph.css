@@ -1,0 +1,23 @@
+.link {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node {
+  text-align: center;
+  cursor: move;
+}
+
+.rect {
+  stroke-width: 1.5px;
+}
+
+.rect.fixed {
+  stroke: #333;
+}
+
+.text {
+  dominant-baseline: central;
+  text-anchor: middle;
+  selected: disable;
+}
